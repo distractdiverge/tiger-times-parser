@@ -1,0 +1,25 @@
+{
+  "name": "tiger-times-parser",
+  "version": "0.1.0",
+  "description": "A simple tool to parse the email newsletter sent by our Elementary School (the 'Tiger Times')",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexlapinski/tiger-times-parser.git"
+  },
+  "keywords": [
+    "parser",
+    "typescript",
+    "email",
+    "newsletter"
+  ],
+  "author": "Alex Lapinski <contact@alexlapinski.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexlapinski/tiger-times-parser/issues"
+  },
+  "homepage": "https://github.com/alexlapinski/tiger-times-parser#readme"
+}
