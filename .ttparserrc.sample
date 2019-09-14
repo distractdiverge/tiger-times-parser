@@ -1,3 +1,4 @@
 [google]
   client_id = 'aClientId'
   client_secret = 'aClientSecret'
+  redirect_uris = ['http://localhost']

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { google } from 'googleapis';
+import R from 'ramda';
 import * as readline from 'readline';
+import { getGoogleConfig, IOAuthCredentials } from './config';
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
@@ -10,29 +12,26 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-// Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) {
-      return console.log('Error loading client secret file:', err);
-  }
-  // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), listLabels);
-});
+authorize(getGoogleConfig(), listLabels);
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
- * @param {Object} credentials The authorization client credentials.
+ * @param {IOAuthCredentials} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
+function authorize(credentials: IOAuthCredentials, callback) {
   const oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
+      credentials.clientId,
+      credentials.clientSecret,
+      R.head(credentials.redirectURIs);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return getNewToken(oAuth2Client, callback);
+    if (err) {
+        return getNewToken(oAuth2Client, callback);
+    }
+
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client);
   });
