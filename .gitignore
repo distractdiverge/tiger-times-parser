@@ -1,3 +1,7 @@
+# Application Config
+.ttparserrc
+!.ttparserrc.sample
+
 # TypeScript
 lib/
 

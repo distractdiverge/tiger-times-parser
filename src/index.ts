@@ -1,5 +1,7 @@
+import { getGoogleConfig } from './config';
+
 const main = () => {
-    console.log('TODO: Implement Something');
+    const config = getGoogleConfig();
 };
 
 if (require.main === module) {
